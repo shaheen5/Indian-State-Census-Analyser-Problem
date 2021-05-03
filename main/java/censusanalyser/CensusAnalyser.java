@@ -19,7 +19,7 @@ public class CensusAnalyser {
             csvToBeanBuilder.withType(IndiaCensusCSV.class);
             csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
             CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
-            Iterator<IndiaCensusCSV> censusCSVIterator = csvToBean.iterator();;
+            Iterator<IndiaCensusCSV> censusCSVIterator = csvToBean.iterator();
             int namOfEateries = 0;
             while (censusCSVIterator.hasNext()) {
                 namOfEateries++;
@@ -29,6 +29,9 @@ public class CensusAnalyser {
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+        }catch (Exception x) {
+            throw new CensusAnalyserException(x.getMessage(),
+                    CensusAnalyserException.ExceptionType.CSV_HEADER_PROBLEM);
         }
     }
 }

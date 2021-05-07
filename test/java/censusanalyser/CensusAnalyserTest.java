@@ -1,6 +1,5 @@
 package censusanalyser;
 
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -65,6 +64,16 @@ public class CensusAnalyserTest {
             censusAnalyser.loadIndiaCensusData(CSV_FILE_WITH_WRONG_DELIMITER);
         } catch (CensusAnalyserException x) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CSV_HEADER_PROBLEM, x.type);
+        }
+    }
+    @Test
+    public void givenIndianStateCodeCSVFileReturnsCorrectRecords() {
+        try {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            int numOfRecords = stateCensusAnalyser.loadStateCodeCensusData("test/resources/IndiaStateCode.csv");
+            Assert.assertEquals(37, numOfRecords);
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
         }
     }
 }
